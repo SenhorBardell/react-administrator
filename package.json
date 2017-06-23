@@ -18,5 +18,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://senhorbardell.github.io/react-administrator"
+  "homepage": "https://senhorbardell.github.io/react-administrator",
+  "engines": {
+    "node": ">=7.1.0"
+  }
 }
