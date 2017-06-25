@@ -4,7 +4,7 @@ import "./Welcome.css";
 class Welcome extends Component {
   render() {
     return (
-      <div>Welcome</div>
+      <div>Main app for client</div>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Redirect, Route, withRouter} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import "./App.css";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
@@ -7,6 +7,7 @@ import User from "./pages/User/User";
 import Welcome from "./pages/Welcome/Welcome";
 import Auth from "./services/Auth";
 import Landing from "./pages/Landing/Landing";
+import Register from "./pages/Register/Register";
 
 class App extends Component {
   render() {
@@ -14,8 +15,9 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/" component={Landing}/>
-          <PrivateRoute exact path="/app" component={Welcome} public="true"/>
+          <PrivateRoute exact path="/app" component={Welcome} pub="true"/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/register" component={Register}/>
           <PrivateRoute exact path="/users" component={Dashboard}/>
           <PrivateRoute path="/users/:id" component={User}/>
         </div>
@@ -24,17 +26,11 @@ class App extends Component {
   }
 }
 
-const AuthButton = withRouter(({history}) => (
-  Auth.isAuthenticated ? (
-    <a href="#" onClick={() => Auth.clear().then(() => history.push('/'))}>Log out</a>
-  ) : (
-    <a href="#" onClick={() => history.push('/login')}>Log in</a>
-  )
-));
 
-const PrivateRoute = ({component: Component, public: Public, ...rest}) => (
+const PrivateRoute = ({component: Component, pub, ...rest}) => (
   <Route {...rest} render={props => (
-    Auth.isAuthenticated() ? (
+
+    Auth.isAuthenticated() && pub || Auth.isAuthorized() && Auth.isAuthenticated() ? ( // eslint-disable-line
       <Component {...props}/>
     ) : (
       <Redirect to={{pathname: '/', state: {from: props.location}}}/>
