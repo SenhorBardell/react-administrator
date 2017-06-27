@@ -1,24 +1,132 @@
-.App {
-  text-align: center;
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+    transform: translate(1000px, 0);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition: all 250ms ease-in-out;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.fade-leave {
+    opacity: 1;
 }
 
-.App-intro {
-  font-size: large;
+.fade-leave.fade-leave-active {
+    transform: translate(-1000px, 0);
+    opacity: 0.01;
+    transition: all 300ms ease-in-out;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.fade-appear {
+    opacity: 0.01;
+    transform: translate(1000px, 0);
+}
+
+.fade-appear.fade-appear-active {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition: all .5s ease-in;
+}
+
+.content-background {
+    background: #db4437;
+    height: 398px;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+nav {
+    position: absolute;
+    right: 200px;
+    top: 76px;
+    font-size: 13px;
+}
+
+nav a {
+    display: block;
+    color: #f7d0cc;
+    padding: 6px 10px;
+    text-decoration: none;
+}
+
+nav h2 {
+    color: white;
+}
+
+nav .links {
+    padding-left: 25px;
+}
+
+nav a:hover {
+    background-color: #c53929;
+    text-decoration: none;
+}
+
+nav a.active {
+    border-left: 2px solid #fff;
+    color: #fff;
+    font-weight: 700;
+}
+
+.page {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+}
+
+header {
+    color: white;
+    font-size: 20px;
+    margin: 20px 20px 20px 80px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+input, textarea {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    padding-bottom: 4px;
+    padding-left: 10px;
+}
+
+.form-row {
+    margin-bottom: 16px;
+}
+
+.form-row label {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 16px;
+}
+
+.container {
+    margin-left: 128px;
+    padding: 64px;
+    background: white;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    min-height: 50vh;
+    width: 832px;
+}
+
+.container h1 {
+    font-size: 34px;
+    line-height: 40px;
+    margin: 0 0 8px;
+    color: #212121;
+    font-weight: 400;
+}
+
+input[type="text"], input[type=email], input[type=password], input[type=date] {
+    border: 0;
+    border-bottom: 1px solid #212121;
 }

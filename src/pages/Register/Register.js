@@ -1,14 +1,26 @@
 import React, {Component} from "react";
+import UserForm from "../../components/UserForm";
 
 const api = process.env.REACT_APP_API_URL;
+const url = process.env.PUBLIC_URL;
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    }
+  }
   submit(e) {
     e.preventDefault();
-    console.log(new Map(new FormData(e.target)));
     return fetch(`${api}/users`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
-      body: new FormData(e.target)
+      body: JSON.stringify({
+        user: this.state.user
+      })
     })
       .then(response => response.json())
       .then(data => {
@@ -21,9 +33,9 @@ class Register extends Component {
           window.localStorage.setItem('token', data.token);
           window.localStorage.setItem('roles', data.roles.join(', '));
           window.localStorage.setItem('id', data.id);
-          if (data.roles.includes('admin')) return this.props.history.push('/users');
+          if (data.roles.includes('admin')) return this.props.history.push(`${url}/users`);
 
-          return this.props.history.push('/app')
+          return this.props.history.push(`${url}/app`)
         }
       })
   }
@@ -32,51 +44,23 @@ class Register extends Component {
     e.target.setCustomValidity('')
   }
 
+  change(e) {
+    const user = Object.assign({}, this.state.user);
+    let name = e.target.name.substring(5);
+    name = name.substr(0, name.length - 1);
+    user[name] = e.target.value;
+    this.setState({user})
+  }
+
   render() {
     return (
       <div>
         <h1>Register</h1>
-        <form onSubmit={e => this.submit(e)}>
-          <div>
-            <label>
-              First name:
-              <input type="text" name="user[first_name]" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Last name:
-              <input type="text" name="user[last_name]" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Email:
-              <input type="email" name="user[email]" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Password:
-              <input type="password" name="user[password]" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Birth date:
-              <input type="date" name="user[birthdate]" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Bio:
-              <textarea name="user[bio]" onBlur={e => this.clearValidity(e)}></textarea>
-            </label>
-          </div>
-          <div>
-            <input type="submit" value="Submit"/>
-          </div>
-        </form>
+        <UserForm
+          submit={e => this.submit(e)}
+          change={e => this.change(e)}
+          user={this.state.user}
+          password={true}/>
       </div>
     )
   }

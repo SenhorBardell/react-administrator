@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import UserForm from "../../components/UserForm";
 import "./User.css";
 
 const api = process.env.REACT_APP_API_URL;
@@ -60,73 +61,27 @@ class User extends Component {
     }).then(response => alert('done'))
   }
 
-  clearValidity(e) {
-    e.target.setCustomValidity('')
-  }
   render() {
     return (
-      <div>
-        <form onSubmit={e => this.submit(e)}>
+      <div className="page">
+        <header>Show user</header>
+        <div className="container">
+          <UserForm
+            submit={e => this.submit(e)}
+            change={e => this.change(e)}
+            user={this.state.user}
+            password={false}/>
           <div>
-            <label>
-              First name:
+            <h2>Email this user</h2>
+            <form onSubmit={e => this.email(e)}>
               <input
-                type="text" name="user[first_name]"
-                value={this.state.user.first_name}
-                onChange={e => this.change(e)}
-                onBlur={e => this.clearValidity(e)}/>
-            </label>
+                type="email"
+                value={this.state.email}
+                placeholder="email"
+                onChange={e => this.updateEmail(e)}/>
+              <input type="submit" value="Send"/>
+            </form>
           </div>
-          <div>
-            <label>
-              Last name:
-              <input
-                type="text" name="user[last_name]"
-                value={this.state.user.last_name}
-                onChange={e => this.change(e)}
-                onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Email:
-              <input
-                type="email" name="user[email]"
-                value={this.state.user.email}
-                onChange={e => this.change(e)}
-                onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Birth date:
-              <input
-                type="date" name="user[birthdate]"
-                value={this.state.user.birthdate}
-                onChange={e => this.change(e)}
-                onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Bio:
-              <textarea name="user[bio]"
-                        onBlur={e => this.clearValidity(e)}
-                        value={this.state.user.bio}
-                        onChange={e => this.change(e)}
-              ></textarea>
-            </label>
-          </div>
-          <div>
-            <input type="submit" value="Submit"/>
-          </div>
-        </form>
-        <div>
-          <h2>Email this user</h2>
-          <form onSubmit={e => this.email(e)}>
-            <input type="email" value={this.state.email} placeholder="email" onChange={e => this.updateEmail(e)}/>
-            <input type="submit" value="Send"/>
-          </form>
         </div>
       </div>
     )

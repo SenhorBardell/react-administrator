@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import "./Login.css";
 
 const api = process.env.REACT_APP_API_URL;
+const url = process.env.PUBLIC_URL;
 
 class Login extends Component {
   submit(e) {
@@ -21,9 +22,9 @@ class Login extends Component {
           window.localStorage.setItem('token', data.token);
           window.localStorage.setItem('roles', data.roles.join(', '));
           window.localStorage.setItem('id', data.id);
-          if (data.roles.includes('admin')) return this.props.history.push('/users');
+          if (data.roles.includes('admin')) return this.props.history.push(`${url}/users`);
 
-          return this.props.history.push('/app')
+          return this.props.history.push(`${url}/app`)
         }
       })
   }

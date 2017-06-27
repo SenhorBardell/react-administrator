@@ -42,17 +42,20 @@ class Dashboard extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>users</h1>
-        <ul>
-          {this.state.users.map(user => (
-            <li key={user.id}>
-              <Link to={`${this.props.match.url}/${user.id}`}>{`${user.first_name} ${user.last_name}`}</Link>
-              &nbsp;
-              <button onClick={e => this.delete(e, user)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+      <div className="page">
+        <header>Users</header>
+        <div className="container">
+          <h1>All users</h1>
+          <ul>
+            {this.state.users.map(user => (
+              <li key={user.id}>
+                <Link to={`${this.props.match.url}/${user.id}`}>{`${user.first_name} ${user.last_name}`}</Link>
+                &nbsp;
+                <button onClick={e => this.delete(e, user)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     )
   }
