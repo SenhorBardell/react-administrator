@@ -54,13 +54,15 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Register</h1>
+      <div className="page">
+        <header>Register</header>
+        <div className="container">
         <UserForm
           submit={e => this.submit(e)}
           change={e => this.change(e)}
           user={this.state.user}
           password={true}/>
+        </div>
       </div>
     )
   }

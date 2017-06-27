@@ -34,25 +34,27 @@ class Login extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Auth</h1>
-        <form onSubmit={e => this.submit(e)}>
-          <div>
-            <label>
-              Email:
-              <input type="email" name="email" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <label>
-              Password:
-              <input type="password" name="password" onBlur={e => this.clearValidity(e)}/>
-            </label>
-          </div>
-          <div>
-            <input type="submit" value="submit"/>
-          </div>
-        </form>
+      <div className="page">
+        <header>Log in</header>
+        <div className="container">
+          <form onSubmit={e => this.submit(e)}>
+            <div>
+              <label>
+                Email:
+                <input type="email" name="email" onBlur={e => this.clearValidity(e)}/>
+              </label>
+            </div>
+            <div>
+              <label>
+                Password:
+                <input type="password" name="password" onBlur={e => this.clearValidity(e)}/>
+              </label>
+            </div>
+            <div>
+              <input type="submit" value="submit"/>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

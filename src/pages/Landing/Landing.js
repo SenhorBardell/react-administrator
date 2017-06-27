@@ -16,9 +16,12 @@ class Landing extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Welcome to user administration app</h1>
-        <Link to={`${url}/login`}>Login</Link> or <Link to={`${url}/register`}>Register</Link>
+      <div className="page">
+        <header>An Awesome app</header>
+        <div className="container">
+          <h1>Welcome to user administration app</h1>
+          <Link to={`${url}/login`}>Login</Link> or <Link to={`${url}/register`}>Register</Link>
+        </div>
       </div>
     )
   }

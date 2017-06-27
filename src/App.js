@@ -33,6 +33,7 @@ class AdminLink extends Component {
       const roles = rolesStr.split(', ');
       return roles.includes('admin') && <NavLink to={`${url}/users`}>Users</NavLink>
     }
+    return null
   }
 }
 
