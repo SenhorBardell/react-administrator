@@ -13,7 +13,6 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    console.log(api, process.env.REACT_APP_API_URL);
     fetch(`${api}/users`, {
       headers: {
         Authorization: `Token ${window.localStorage.getItem('token')}`

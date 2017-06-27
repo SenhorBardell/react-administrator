@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import UserForm from "../../components/UserForm";
+import moment from "moment";
 import "./User.css";
 
 const api = process.env.REACT_APP_API_URL;
@@ -19,7 +20,10 @@ class User extends Component {
       }
     })
       .then(response => response.json())
-      .then(user => this.setState({user}))
+      .then(user => {
+        user.birth_date = moment(user.birth_date).format('YYYY-MM-DD');
+        return this.setState({user})
+      })
   }
 
   submit(e) {
@@ -35,13 +39,16 @@ class User extends Component {
       })
     })
       .then(response => response.json())
-      .then(user => this.setState({user}))
+      .then(user => {
+        user.birth_date = moment(user.birth_date).format('YYYY-MM-DD');
+        return this.setState({user})
+      })
   }
 
   change(e) {
     const user = Object.assign({}, this.state.user);
-    let name = e.target.name.substring(5);
-    name = name.substr(0, name.length - 1);
+    let name = e.target.name.substring(5); // since i am not submitting for, rather object
+    name = name.substr(0, name.length - 1); // fancy names is obsolete
     user[name] = e.target.value;
     this.setState({user})
   }

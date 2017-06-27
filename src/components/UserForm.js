@@ -54,8 +54,8 @@ class UserForm extends Component {
       <div className="form-row">
         <label>Birth date:</label>
         <input
-          type="date" name="user[birthdate]"
-          value={this.props.user.birthdate}
+          type="date" name="user[birth_date]"
+          value={this.props.user.birth_date}
           onChange={e => this.change(e)}
           onBlur={e => this.clearValidity(e)}/>
       </div>
