@@ -29,8 +29,10 @@ class LogoutLink extends Component {
 class AdminLink extends Component {
   render() {
     const rolesStr = window.localStorage.getItem('roles');
-    const roles = rolesStr.split(', ');
-    return roles.includes('admin') && <NavLink to={`${url}/users`}>Users</NavLink>
+    if (rolesStr) {
+      const roles = rolesStr.split(', ');
+      return roles.includes('admin') && <NavLink to={`${url}/users`}>Users</NavLink>
+    }
   }
 }
 
@@ -49,12 +51,12 @@ class App extends Component {
                                   transitionAppearTimeout={500}
               >
                 <Switch key={location.key} location={location}>
-                  <Route exact path="/" component={Landing}/>
-                  <PrivateRoute exact path="/app" component={Welcome} pub="true"/>
-                  <Route exact path="/login" component={Login}/>
-                  <Route exact path="/register" component={Register}/>
-                  <PrivateRoute exact path="/users" component={Dashboard}/>
-                  <PrivateRoute path="/users/:id" component={User}/>
+                  <Route exact path={`${url}/`} component={Landing}/>
+                  <PrivateRoute exact path={`${url}/app`} component={Welcome} pub="true"/>
+                  <Route exact path={`${url}/login`} component={Login}/>
+                  <Route exact path={`${url}/register`} component={Register}/>
+                  <PrivateRoute exact path={`${url}/users`} component={Dashboard}/>
+                  <PrivateRoute path={`${url}/users/:id`} component={User}/>
                 </Switch>
               </CSSTransitionGroup>
               <nav>
